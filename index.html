@@ -6,6 +6,7 @@
   <title>Pipeline Rev Partners</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <link rel="icon" href="https://fav.farm/📈" />
   <style>
     :root {
       --primary: #00ffa6;
@@ -27,6 +28,7 @@
       margin: auto;
       line-height: 1.7;
       animation: fadeIn 1.2s ease;
+      scroll-behavior: smooth;
     }
 
     @keyframes fadeIn {
@@ -39,7 +41,7 @@
       margin-bottom: 40px;
     }
 
-    header img.logo {
+    header svg.logo {
       max-width: 180px;
       margin-bottom: 20px;
     }
@@ -141,29 +143,45 @@
       font-weight: 600;
       color: #ccc;
     }
+
+    .sticky-cta {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary);
+      color: #000;
+      font-weight: bold;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
   <header>
     <svg class="logo" width="140" height="140" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="48" stroke="#00ffa6" stroke-width="4" fill="none" />
-  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#00ffa6" font-size="22" font-family="Inter, sans-serif" font-weight="bold">PR</text>
-</svg>
+      <circle cx="50" cy="50" r="48" stroke="#00ffa6" stroke-width="4" fill="none" />
+      <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#00ffa6" font-size="22" font-family="Inter, sans-serif" font-weight="bold">PR</text>
+    </svg>
     <h1>Pipeline Rev Partners</h1>
     <p class="tagline">Revenue-First Closers for High-Ticket Offers</p>
   </header>
 
   <svg class="hero-img" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f2027"/>
-      <stop offset="50%" stop-color="#203a43"/>
-      <stop offset="100%" stop-color="#2c5364"/>
-    </linearGradient>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#bg)" />
-  <polyline points="50,300 150,220 250,260 350,160 450,200 550,100" fill="none" stroke="#00ffa6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-  <circle cx="550" cy="100" r="6" fill="#00ffa6" />
+    <defs>
+      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0f2027"/>
+        <stop offset="50%" stop-color="#203a43"/>
+        <stop offset="100%" stop-color="#2c5364"/>
+      </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bg)" />
+    <polyline id="growth-line" points="50,300 150,220 250,260 350,160 450,200 550,100" fill="none" stroke="#00ffa6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+<circle cx="550" cy="100" r="6" fill="#00ffa6" />
 </svg>
 
   <section>
@@ -196,35 +214,51 @@
     <cite id="testimonial-author">— Jamie M., Agency Founder</cite>
   </section>
 
-  <script>
-    const testimonials = [
-      {
-        text: "Pipeline Rev helped us scale from $10k to $50k/month in under 90 days. They didn’t just close — they helped restructure our offer to boost conversions.",
-        author: "— Jamie M., Agency Founder"
-      },
-      {
-        text: "The team closed 24 deals in 6 weeks from leads we thought were dead. We literally reshaped our cash flow overnight.",
-        author: "— Katrina L., Online Coach"
-      },
-      {
-        text: "I’ve worked with closers before, but nothing like this. Sharp, reliable, and results-driven. Easily the best sales partners I’ve brought on.",
-        author: "— Dev Patel, SaaS Founder"
-      }
-    ];
-
-    let index = 0;
-    setInterval(() => {
-      index = (index + 1) % testimonials.length;
-      document.getElementById("testimonial-text").textContent = testimonials[index].text;
-      document.getElementById("testimonial-author").textContent = testimonials[index].author;
-    }, 6000);
-  </script>
-
   <div class="cta">
     <h2>Book a Free Strategy Call</h2>
     <p>We’ll audit your pipeline, highlight where you're losing revenue, and show you how we’d close more — without more ad spend.</p>
     <div class="calendly-inline-widget" data-url="https://calendly.com/joe03wood"></div>
   </div>
+
+  <button class="sticky-cta" onclick="document.querySelector('.calendly-inline-widget').scrollIntoView({ behavior: 'smooth' });">Book Call</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const line = document.getElementById('growth-line');
+      if (line) {
+        const length = line.getTotalLength();
+        line.style.strokeDasharray = length;
+        line.style.strokeDashoffset = length;
+        line.style.transition = 'stroke-dashoffset 2.5s ease-out';
+        setTimeout(() => {
+        line.style.strokeDashoffset = '0';
+        document.getElementById('arrow-head').style.opacity = '1';
+      }, 300);
+      }
+
+      const testimonials = [
+        {
+          text: "Pipeline Rev helped us scale from $10k to $50k/month in under 90 days. They didn’t just close — they helped restructure our offer to boost conversions.",
+          author: "— Jamie M., Agency Founder"
+        },
+        {
+          text: "The team closed 24 deals in 6 weeks from leads we thought were dead. We literally reshaped our cash flow overnight.",
+          author: "— Katrina L., Online Coach"
+        },
+        {
+          text: "I’ve worked with closers before, but nothing like this. Sharp, reliable, and results-driven. Easily the best sales partners I’ve brought on.",
+          author: "— Dev Patel, SaaS Founder"
+        }
+      ];
+
+      let index = 0;
+      setInterval(() => {
+        index = (index + 1) % testimonials.length;
+        document.getElementById("testimonial-text").textContent = testimonials[index].text;
+        document.getElementById("testimonial-author").textContent = testimonials[index].author;
+      }, 6000);
+    });
+  </script>
 </body>
 </html>
 
